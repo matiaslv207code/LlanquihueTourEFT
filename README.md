@@ -47,9 +47,9 @@ git clone https://github.com/matiaslv207code/LlanquihueTourEFT.git
 
 ---
 
-**Repositorio GitHub:** \[https://github.com/matiaslv207code/LlanquihueTourEFT]
+**Repositorio GitHub:** https://github.com/matiaslv207code/LlanquihueTourEFT
 
-**Fecha de entrega:** \[19/07/2026]
+**Fecha de entrega:** 19/07/2026
 
 ---
 
