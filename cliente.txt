@@ -1,0 +1,2 @@
+12345678;5;Diego Valdes;Av. Costanera;450;Llanquihue;diego@email.com;Frecuente
+11111111;1;Ana Gomez;San Francisco;102;Puerto Varas;ana@email.com;Nuevo
