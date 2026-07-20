@@ -2,6 +2,7 @@ package app;
 
 import cl.duoc.llanquihuetour.interfaces.Registrable;
 import model.*;
+import utils.LectorArchivo;
 import cl.duoc.llanquihuetour.exception.RutInvalidoException;
 
 import java.util.ArrayList;
@@ -14,18 +15,15 @@ public class Main {
         List<Registrable> inventarioEntidades = new ArrayList<>();
         Scanner scanner = new Scanner(System.in);
 
-        // precarga automatica de clientes y guias directo en el codigo
+        // 1. carga automatica de clientes desde el archivo txt (exigido por rubrica)
+        System.out.println("Cargando datos desde clientes.txt...");
+        List<Cliente> clientesCargados = LectorArchivo.cargarClientes("data/clientes.txt");
+        if (clientesCargados != null) {
+            inventarioEntidades.addAll(clientesCargados);
+        }
+
+        // 2. precarga automatica de guias directo en el codigo para complementar la lista
         try {
-            // ruts y direcciones para los clientes
-            Rut rutC1 = new Rut(11111111, '1');
-            Direccion dirC1 = new Direccion("Av Concón", 450, "Viña del Mar");
-            Cliente cliente1 = new Cliente("Ana Maria", rutC1, dirC1, "ana@gmail.com", "Frecuente");
-
-            Rut rutC2 = new Rut(33333333, '3');
-            Direccion dirC2 = new Direccion("Picarte", 1210, "Valdivia");
-            Cliente cliente2 = new Cliente("Luis Gomez", rutC2, dirC2, "luis@gmail.com", "Nuevo");
-
-            // ruts y direcciones para los guias
             Rut rutG1 = new Rut(22222222, '2');
             Direccion dirG1 = new Direccion("Los Alerces", 89, "Llanquihue");
             Guia guia1 = new Guia("Carlos Perez", rutG1, dirG1, "Alemán/Inglés", 45000);
@@ -34,17 +32,13 @@ public class Main {
             Direccion dirG2 = new Direccion("Costanera", 55, "Puerto Varas");
             Guia guia2 = new Guia("Maria Jose", rutG2, dirG2, "Español/Portugués", 50000);
 
-            // agrega todas las entidades cargadas al inventario
-            inventarioEntidades.add(cliente1);
-            inventarioEntidades.add(cliente2);
             inventarioEntidades.add(guia1);
             inventarioEntidades.add(guia2);
 
-            System.out.println("--- Base de datos local inicializada con éxito ---\n");
+            System.out.println("--- Base de datos inicializada con éxito (Archivo + Código) ---\n");
 
         } catch (RutInvalidoException e) {
-            // captura errores si algun rut de la precarga falla
-            System.out.println("Error en datos iniciales: " + e.getMessage());
+            System.out.println("Error en carga de guías: " + e.getMessage());
         }
 
         // despliega el menu de opciones iterativo
@@ -68,7 +62,6 @@ public class Main {
             switch (opcion) {
                 case 1:
                     System.out.println("\n--- LISTADO GENERAL DE ENTIDADES ---");
-                    // recorre y muestra todas las entidades
                     for (Registrable r : inventarioEntidades) {
                         r.mostrarDatos();
                         System.out.println("-------------------------------------");
@@ -76,7 +69,6 @@ public class Main {
                     break;
                 case 2:
                     System.out.println("\n--- LISTADO DE CLIENTES (Uso de instanceof) ---");
-                    // filtra y muestra solo los objetos de tipo cliente
                     for (Registrable r : inventarioEntidades) {
                         if (r instanceof Cliente) {
                             r.mostrarDatos();
@@ -86,7 +78,6 @@ public class Main {
                     break;
                 case 3:
                     System.out.println("\n--- LISTADO DE GUÍAS (Uso de instanceof) ---");
-                    // filtra y muestra solo los objetos de tipo guia
                     for (Registrable r : inventarioEntidades) {
                         if (r instanceof Guia) {
                             r.mostrarDatos();
