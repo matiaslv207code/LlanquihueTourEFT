@@ -17,7 +17,7 @@ public class Main {
 
         // 1. carga automatica de clientes desde el archivo txt (exigido por rubrica)
         System.out.println("Cargando datos desde clientes.txt...");
-        List<Cliente> clientesCargados = LectorArchivo.cargarClientes("data/clientes.txt");
+        List<Cliente> clientesCargados = LectorArchivo.cargarClientes("cliente.txt");
         if (clientesCargados != null) {
             inventarioEntidades.addAll(clientesCargados);
         }
